@@ -1,5 +1,10 @@
 package com.main;
 
+import com.calculator.Calculator;
+import com.calculator.Calculator.OperationsParser;
+
+import java.util.Scanner;
+
 /**
  * @author belob
  * @version 1.0
@@ -7,7 +12,12 @@ package com.main;
  */
 public class MainCalculator {
 
-    public static void main(String [] args){
-
+    public static void main(String[] args) {
+        Calculator calculator = new Calculator();
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter operation: \n");
+        calculator.operationsParser.parsingString(scanner.next());
+        calculator.calculateResult();
+        System.out.println("Result: " + calculator.calculateResult());
     }
 }
