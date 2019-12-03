@@ -1,7 +1,4 @@
-package com.main;
-
-import com.calculator.Calculator;
-import com.calculator.Calculator.OperationsParser;
+package com.calculator;
 
 import java.util.Scanner;
 

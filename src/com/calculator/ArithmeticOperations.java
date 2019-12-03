@@ -6,10 +6,12 @@ package com.calculator;
 public interface ArithmeticOperations {
 
     default int composition(int a, int b){
+
         return a + b;
     };
 
     default int subtraction(int a, int b){
+
         return a - b;
     };
 
