@@ -24,9 +24,9 @@ public class OperationsParser {
     /*arguments of operations*/
     List args;
     /*wrong operations flag*/
-    private String errorMessage;
+    private String errorMessage = "";
     /*arithmetic operand*/
-    private String operand;
+    String operand;
 
 
     public OperationsParser() {
@@ -39,6 +39,7 @@ public class OperationsParser {
      * @param operationString user input string operation
      */
     public void parsingString(String operationString) {
+        errorMessage = "";
         if (operationString == "") {
             fillErrorMessage();
             return;
@@ -49,12 +50,28 @@ public class OperationsParser {
         char[] arrayChar = tempString.toCharArray();
         /*check for digits*/
         if (Character.isDigit(arrayChar[0])) {
-            (new ArabDigitsOperationParser()).digitOperationAnalyze(arrayChar);
+            ArabDigitsOperationParser parser = new ArabDigitsOperationParser();
+            if (!parser.digitOperationAnalyze(arrayChar)){
+                fillErrorMessage();
+                return;
+            }
+            if (parser.args != null){
+                this.args = parser.args;
+                this.operand = parser.operand;
+            }
             return;
         }
         /*check for rome digits*/
         if (Arrays.asList(new Character[]{'I', 'X', 'V'}).contains(arrayChar[0])) {
-            (new RomeOperationsParser()).romeDigitsOperationAnalyze(arrayChar);
+            RomeOperationsParser parser = new RomeOperationsParser();
+            if (!parser.romeDigitsOperationAnalyze(arrayChar)){
+                fillErrorMessage();
+                return;
+            }
+            if (parser.args != null){
+                this.args = parser.args;
+                this.operand = parser.operand;
+            }
             return;
         }
         fillErrorMessage();
@@ -81,7 +98,7 @@ public class OperationsParser {
             case 0:
                 return operandIndex;
             case 1:
-                return charArrayLen - operandIndex + 1;
+                return charArrayLen - (operandIndex + 1);
         }
         return -1;
     }

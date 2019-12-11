@@ -1,5 +1,6 @@
 package com.calculator;
 
+import java.awt.*;
 import java.util.Arrays;
 
 /**
@@ -9,37 +10,50 @@ import java.util.Arrays;
 
 public class RomeOperationsParser extends OperationsParser {
 
-    public RomeOperationsParser(){
+    List args;
+    String operand;
+
+    public RomeOperationsParser() {
         super();
+        args = new List();
     }
+
     /**
      * working with rome digit arithmetic operation
      *
      * @param arrayChar operation string
+     *
+     * @return
      */
-     void romeDigitsOperationAnalyze(char[] arrayChar) {
+    boolean romeDigitsOperationAnalyze(char[] arrayChar) {
         /*rome digit operation string length can't be more then 9*/
         if (arrayChar.length > 9 || arrayChar.length < 3) {
             fillErrorMessage();
-            return;
+            return false;
         }
         /* get the index of arithmetic operand */
         int operandIndex = getOperandIndex(arrayChar);
         if (operandIndex < 1 || operandIndex > 4) {
             fillErrorMessage();
-            return;
+            return false;
         }
+        operand = String.valueOf(arrayChar[operandIndex]);
         int leftSideCount = getCountSymbols(LEFT_SIDE, operandIndex, arrayChar.length);
-        int rightSideCount = getCountSymbols(RIGHT_SIDE, operandIndex, arrayChar.length) ;
-        if(leftSideCount == -1 || rightSideCount == -1){
+        int rightSideCount = getCountSymbols(RIGHT_SIDE, operandIndex, arrayChar.length);
+        if (leftSideCount == -1 || rightSideCount == -1) {
             fillErrorMessage();
-            return;
+            return false;
         }
         //get left arg
-        fillOperationArgs(leftSideCount,0, arrayChar);
+        fillOperationArgs(leftSideCount, 0, arrayChar);
         //get right arg
-        fillOperationArgs(rightSideCount,operandIndex + 1, arrayChar);
+        fillOperationArgs(rightSideCount, operandIndex + 1, arrayChar);
+        if (getErrorMessage() != "") {
+            return false;
+        }
+        return true;
     }
+
     private void fillOperationArgs(int countSymbols, int index, char[] arrayChar) {
         switch (countSymbols) {
             case (1):
@@ -58,6 +72,7 @@ public class RomeOperationsParser extends OperationsParser {
                 break;
         }
     }
+
     private void getParsedToDigitOneSymbol(char romeChar) {
         if (Arrays.asList(new Character[]{'I', 'V', 'X'}).contains(romeChar)) {
             switch (romeChar) {
@@ -71,43 +86,52 @@ public class RomeOperationsParser extends OperationsParser {
                     args.add("10");
                     break;
             }
+        } else {
+            fillErrorMessage();
         }
-        fillErrorMessage();
     }
 
     private void getParsedToDigitTwoSymbols(String romeDigits) {
-        switch (romeDigits) {
-            case "II":
-                args.add("2");
-                break;
-            case "IV":
-                args.add("4");
-                break;
-            case "VI":
-                args.add("6");
-                break;
-            case "IX":
-                args.add("9");
-                break;
+        if (Arrays.asList(new String[]{"II", "IV", "VI", "IX"}).contains(romeDigits)) {
+            switch (romeDigits) {
+                case "II":
+                    args.add("2");
+                    break;
+                case "IV":
+                    args.add("4");
+                    break;
+                case "VI":
+                    args.add("6");
+                    break;
+                case "IX":
+                    args.add("9");
+                    break;
+            }
+        } else {
+            fillErrorMessage();
         }
-        fillErrorMessage();
     }
 
     private void getParsedToDigitThreeSymbols(String romeDigits) {
-        switch (romeDigits) {
-            case "III":
-                args.add("3");
-                break;
-            case "VII":
-                args.add("7");
-                break;
+        if (Arrays.asList(new String[]{"III", "VII"}).contains(romeDigits)) {
+            switch (romeDigits) {
+                case "III":
+                    args.add("3");
+                    break;
+                case "VII":
+                    args.add("7");
+                    break;
+            }
+        } else {
+            fillErrorMessage();
         }
-        fillErrorMessage();
     }
+
     private void getParsedToDigitFourSymbols(String romeDigits) {
         if (romeDigits.equals("VIII")) {
             args.add("8");
+        } else {
+            fillErrorMessage();
         }
-        fillErrorMessage();
     }
 }

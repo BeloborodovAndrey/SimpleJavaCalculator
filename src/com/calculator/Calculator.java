@@ -45,14 +45,14 @@ public class Calculator implements ArithmeticOperations {
     }
 
     /*define result value by operationSelection*/
-    public String calculateResult() {
+    public String calculateResult(String operation) {
         try {
+            errMessage = "";
             if (operationsParser == null) {
                 throw new NullPointerException("You must initialize operationsParser before");
             }
-            if (operationsParser.getArgs().getSize().equals(0)) {
-                throw new Exception("Method calculateResult() cant't start before operationsParser.parsingString() ");
-            }
+            /*translate operation to arithmetic*/
+            operationsParser.parsingString(operation);
             if (operationsParser.getErrorMessage() != "") {
                 return operationsParser.getErrorMessage();
             }
