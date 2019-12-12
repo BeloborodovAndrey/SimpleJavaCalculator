@@ -16,7 +16,7 @@ public class MainCalculator {
             System.out.println("For exit of program enter 'exit' \n ");
             while (true) {
                 System.out.println("Enter operation: \n");
-                String operation = scanner.next();
+                String operation = scanner.nextLine();
                 if (operation.equalsIgnoreCase("exit")){
                     return;
                 }

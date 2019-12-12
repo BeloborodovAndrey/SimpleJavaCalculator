@@ -60,15 +60,17 @@ public class RomeOperationsParser extends OperationsParser {
                 getParsedToDigitOneSymbol(arrayChar[index]);
                 break;
             case (2):
-                getParsedToDigitTwoSymbols(String.valueOf(arrayChar[index] + arrayChar[index + 1]));
+                getParsedToDigitTwoSymbols(String.valueOf(arrayChar[index]) +
+                        String.valueOf(arrayChar[index + 1]));
                 break;
             case (3):
-                getParsedToDigitThreeSymbols(String.valueOf(arrayChar[index] + arrayChar[index + 1]
-                        + arrayChar[index + 2]));
+                getParsedToDigitThreeSymbols(String.valueOf(arrayChar[index]) +
+                        String.valueOf(arrayChar[index + 1]) + String.valueOf(arrayChar[index + 2]));
                 break;
             case (4):
-                getParsedToDigitFourSymbols(String.valueOf(arrayChar[index] + arrayChar[index + 1]
-                        + arrayChar[index + 2] + arrayChar[index + 3]));
+                getParsedToDigitFourSymbols(String.valueOf(arrayChar[index]) +
+                        String.valueOf(arrayChar[index + 1]) + String.valueOf(arrayChar[index + 2])+
+                        String.valueOf(arrayChar[index + 3]));
                 break;
         }
     }
