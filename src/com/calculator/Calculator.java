@@ -61,12 +61,16 @@ public class Calculator implements ArithmeticOperations {
             if (result == null) {
                 return "illegal operation";
             }
+            if (!operationsParser.getArabParser()) {
+                result = new RomeConverter().convertRomeDigitsResult(Integer.parseInt(result));
+            }
             return result;
         } catch (Exception ex) {
             errMessage = ex.getMessage();
             return "";
         }
     }
+
 }
 
 

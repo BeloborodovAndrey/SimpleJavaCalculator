@@ -13,11 +13,11 @@ public interface ArithmeticOperations {
     default int subtraction(int a, int b){
 
         return a - b;
-    };
+    }
 
-    default double division(int a, int b){
-        return a / b;
-    };
+    default int division(int a, int b){
+        return  a / b;
+    }
 
     default int multiplication(int a, int b){
         return a * b;

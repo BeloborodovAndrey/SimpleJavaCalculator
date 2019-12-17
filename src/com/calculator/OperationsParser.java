@@ -27,12 +27,15 @@ public class OperationsParser {
     private String errorMessage = "";
     /*arithmetic operand*/
     String operand;
+    /*flag for indicate the kind of parser*/
+    private Boolean isArabParser;
 
 
     public OperationsParser() {
         /*initialize allowableValuesList*/
         Collections.addAll(allowableValuesList, allowableValues);
         args = new List();
+        isArabParser = false;
     }
 
     /**
@@ -50,27 +53,28 @@ public class OperationsParser {
         char[] arrayChar = tempString.toCharArray();
         /*check for digits*/
         if (Character.isDigit(arrayChar[0])) {
-            ArabDigitsOperationParser parser = new ArabDigitsOperationParser();
-            if (!parser.digitOperationAnalyze(arrayChar)){
+            isArabParser = true;
+            ArabDigitsOperationParser subParser = new ArabDigitsOperationParser();
+            if (!subParser.digitOperationAnalyze(arrayChar)){
                 fillErrorMessage();
                 return;
             }
-            if (parser.args != null){
-                this.args = parser.args;
-                this.operand = parser.operand;
+            if (subParser.args != null){
+                this.args = subParser.args;
+                this.operand = subParser.operand;
             }
             return;
         }
         /*check for rome digits*/
         if (Arrays.asList(new Character[]{'I', 'X', 'V'}).contains(arrayChar[0])) {
-            RomeOperationsParser parser = new RomeOperationsParser();
-            if (!parser.romeDigitsOperationAnalyze(arrayChar)){
+            RomeOperationsParser subParser = new RomeOperationsParser();
+            if (!subParser.romeDigitsOperationAnalyze(arrayChar)){
                 fillErrorMessage();
                 return;
             }
-            if (parser.args != null){
-                this.args = parser.args;
-                this.operand = parser.operand;
+            if (subParser.args != null){
+                this.args = subParser.args;
+                this.operand = subParser.operand;
             }
             return;
         }
@@ -114,5 +118,9 @@ public class OperationsParser {
             }
         }
         return operandIndex;
+    }
+
+    public Boolean getArabParser() {
+        return isArabParser;
     }
 }

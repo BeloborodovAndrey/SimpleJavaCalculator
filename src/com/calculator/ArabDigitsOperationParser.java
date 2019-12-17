@@ -15,6 +15,7 @@ public class ArabDigitsOperationParser extends OperationsParser {
         super();
         args = new List();
     }
+
     /**
      * working with digit arithmetic operation
      *
