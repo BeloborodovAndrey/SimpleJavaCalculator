@@ -44,6 +44,18 @@ public class Calculator implements ArithmeticOperations {
         }
     }
 
+    private String receiveResult(){
+        String result = operationSelection(Integer.valueOf(operationsParser.getArgs().getItem(0)),
+                Integer.valueOf(operationsParser.getArgs().getItem(1)), operationsParser.getOperand());
+        if (result == null) {
+            return "illegal operation";
+        }
+        if (!operationsParser.getArabParser()) {
+            result = new RomeConverter().convertRomeDigitsResult(Integer.parseInt(result));
+        }
+        return result;
+    }
+
     /*define result value by operationSelection*/
     public String calculateResult(String operation) {
         try {
@@ -56,15 +68,7 @@ public class Calculator implements ArithmeticOperations {
             if (operationsParser.getErrorMessage() != "") {
                 return operationsParser.getErrorMessage();
             }
-            String result = operationSelection(Integer.valueOf(operationsParser.getArgs().getItem(0)),
-                    Integer.valueOf(operationsParser.getArgs().getItem(1)), operationsParser.getOperand());
-            if (result == null) {
-                return "illegal operation";
-            }
-            if (!operationsParser.getArabParser()) {
-                result = new RomeConverter().convertRomeDigitsResult(Integer.parseInt(result));
-            }
-            return result;
+            return receiveResult();
         } catch (Exception ex) {
             errMessage = ex.getMessage();
             return "";

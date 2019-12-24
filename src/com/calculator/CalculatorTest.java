@@ -18,12 +18,13 @@ class CalculatorTest {
         Assertions.assertEquals(calculator.calculateResult("10 + 10"), "20");
         Assertions.assertEquals(calculator.calculateResult("10+ 5"), "15");
         Assertions.assertEquals(calculator.calculateResult("10+ 11"), errorMessage);
-        Assertions.assertEquals(calculator.calculateResult("V+ X"), "15");
-        Assertions.assertEquals(calculator.calculateResult("VI+ X"), "16");
-        Assertions.assertEquals(calculator.calculateResult("V+ IX"), "14");
+        Assertions.assertEquals(calculator.calculateResult("V+ X"), "XV");
+        Assertions.assertEquals(calculator.calculateResult("VI+ X"), "XVI");
+        Assertions.assertEquals(calculator.calculateResult("V+ IX"), "XIV");
         Assertions.assertEquals(calculator.calculateResult("VI+ XI"),errorMessage);
-        Assertions.assertEquals(calculator.calculateResult("X+ VIII"), "18");
-        Assertions.assertEquals(calculator.calculateResult("VI+ VIII"), "14");
-        Assertions.assertEquals(calculator.calculateResult("VIII+ VIII"), "16");
+        Assertions.assertEquals(calculator.calculateResult("X+ VIII"), "XVIII");
+        Assertions.assertEquals(calculator.calculateResult("VI* VIII"), "XLVIII");
+        Assertions.assertEquals(calculator.calculateResult("VIII/ VIII"), "I");
+        Assertions.assertEquals(calculator.calculateResult("X* X"), "C");
     }
 }

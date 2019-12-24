@@ -67,6 +67,7 @@ public class OperationsParser {
         }
         /*check for rome digits*/
         if (Arrays.asList(new Character[]{'I', 'X', 'V'}).contains(arrayChar[0])) {
+            isArabParser = false;
             RomeOperationsParser subParser = new RomeOperationsParser();
             if (!subParser.romeDigitsOperationAnalyze(arrayChar)){
                 fillErrorMessage();
